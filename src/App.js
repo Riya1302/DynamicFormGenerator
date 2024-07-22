@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import FormBuilder from './components/FormBuilder';
+import FormGenerator from './components/FormGenerator';
+import './styles.css';
 
-function App() {
+const App = () => {
+  const [formConfig, setFormConfig] = useState([]);
+
+  const handleSaveConfig = (config) => {
+    setFormConfig(config);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>Dynamic Form Generator</h1>
+      <FormBuilder onSave={handleSaveConfig} />
+      {formConfig.length > 0 && <FormGenerator fields={formConfig} />}
     </div>
   );
-}
+};
 
 export default App;
